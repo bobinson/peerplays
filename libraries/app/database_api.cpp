@@ -545,7 +545,7 @@ vector<vector<account_id_type>> database_api_impl::get_key_references( vector<pu
           auto itr = refs.account_to_address_memberships.find(a);
           if( itr != refs.account_to_address_memberships.end() )
           {
-             result.reserve( itr->second.size() );
+             result.reserve( result.size() + itr->second.size() );
              for( auto item : itr->second )
              {
                 wdump((a)(item)(item(_db).name));
@@ -556,7 +556,7 @@ vector<vector<account_id_type>> database_api_impl::get_key_references( vector<pu
 
       if( itr != refs.account_to_key_memberships.end() )
       {
-         result.reserve( itr->second.size() );
+         result.reserve( result.size() + itr->second.size() );
          for( auto item : itr->second ) result.push_back(item);
       }
       final_result.emplace_back( std::move(result) );
